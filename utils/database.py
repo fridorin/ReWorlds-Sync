@@ -22,6 +22,10 @@ async def conection_mysql():
 async def create_table(guild_id):
     conn = await conection_mysql()
     cur = await conn.cursor()
-    await cur.execute(f"""CREATE TABLE {guild_id}(
-                        name VARCHAR(100),
-                        value BIGINT)""")
+    await cur.execute(f"""CREATE TABLE `{guild_id}` (name VARCHAR(100), value BIGINT)""")
+
+
+async def initial_data_addition(guild_id):
+    conn = await conection_mysql()
+    cur = await conn.cursor()
+    await cur.execute(f"""INSERT INTO `1179812788911227040` VALUES ("activation", 0)""")

@@ -2,7 +2,9 @@ import logging
 import disnake
 import time
 from disnake.ext import commands
-from utils.synchronization import synchronization_nicknames
+
+from utils.database import create_table, initial_data_addition
+from utils.synchronization import synchronization_nicknames_all
 
 logger = logging.getLogger(__name__)
 
@@ -15,16 +17,9 @@ class Test(commands.Cog):
     @commands.is_owner()
     async def test(self, inter: disnake.ApplicationCommandInteraction):
         start_time = time.time()
-        await synchronization_nicknames(self.bot)
+        await create_table(1179812788911227040)
         end_time = time.time()
-        await inter.response.send_message(
-            embed=disnake.Embed(
-                title="Время выполнения синхронизации",
-                description=f"{end_time - start_time} секунд",
-                color=disnake.Color.green(),
-            ),
-            ephemeral=True,
-        )
+        print(end_time - start_time)
 
 
 def setup(bot: commands.Bot):
